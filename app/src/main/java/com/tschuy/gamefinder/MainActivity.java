@@ -12,6 +12,10 @@ import android.view.ViewGroup;
 import android.os.Build;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
+import android.util.Log;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
 import com.tschuy.gamefinder.GamesFragment;
 
 
@@ -19,6 +23,21 @@ public class MainActivity extends AppCompatActivity implements GamesFragment.OnF
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Ion.with(getApplicationContext())
+                .load("http://140.211.9.30:443/games")
+                .asString()
+                .setCallback(new FutureCallback<String>() {
+                    @Override
+                    public void onCompleted(Exception e, String result) {
+                        if(result == null) {
+                            Log.v("GAME", "string is null");
+                            e.printStackTrace();
+                        }
+                        else {
+                            Log.v("GAME", result);
+                        }
+                    }
+                });
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
