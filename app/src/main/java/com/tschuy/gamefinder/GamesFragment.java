@@ -3,6 +3,7 @@ package com.tschuy.gamefinder;
 import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 import com.tschuy.gamefinder.dummy.DummyContent;
 
+import com.tschuy.gamefinder.Game;
 import java.util.ArrayList;
 
 /**
@@ -51,6 +53,7 @@ public class GamesFragment extends Fragment implements AbsListView.OnItemClickLi
      * Views.
      */
     private ListAdapter mAdapter;
+    private ArrayList<Game> myArray;
 
     // TODO: Rename and change types of parameters
     public static GamesFragment newInstance(String param1, String param2) {
@@ -69,6 +72,10 @@ public class GamesFragment extends Fragment implements AbsListView.OnItemClickLi
     public GamesFragment() {
     }
 
+    public void addGames(ArrayList<Game> games) {
+        myArray.addAll(games);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,12 +85,9 @@ public class GamesFragment extends Fragment implements AbsListView.OnItemClickLi
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        ArrayList<String> myArray = new ArrayList<String>();
-        myArray.add("Hello World");
-        myArray.add("Bonjour Monde");
-        myArray.add("Hallo Welt");
+        myArray = new ArrayList<Game>();
         // TODO: Change Adapter to display your content
-        mAdapter = new ArrayAdapter<String>(getActivity(),
+        mAdapter = new ArrayAdapter<Game>(getActivity(),
                 android.R.layout.simple_list_item_1, myArray);
     }
 
@@ -94,7 +98,10 @@ public class GamesFragment extends Fragment implements AbsListView.OnItemClickLi
 
         // Set the adapter
         mListView = (AbsListView) view.findViewById(android.R.id.list);
-        ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
+        if (mListView == null) {
+            Log.v("GAME", "it's null :(");
+        }
+        mListView.setAdapter(mAdapter);
 
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);
