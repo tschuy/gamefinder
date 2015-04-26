@@ -43,6 +43,7 @@ public class GameDetail extends ActionBarActivity {
 
         ((TextView) findViewById(R.id.user)).setText(game.getUser());
         ((TextView) findViewById(R.id.game_type)).setText(game.getGameType());
+        ((TextView) findViewById(R.id.where)).setText(game.getLocationName());
 
     }
 

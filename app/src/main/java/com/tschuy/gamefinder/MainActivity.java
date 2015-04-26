@@ -55,10 +55,12 @@ public class MainActivity extends AppCompatActivity implements GamesFragment.OnF
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
+            Log.v("GAME", "fragmenting");
             gameList = new GamesFragment();
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, (Fragment) gameList)
                     .commit();
+            Log.v("GAME", "done fragmenting");
         }
     }
 

@@ -74,6 +74,11 @@ public class GamesFragment extends Fragment implements AbsListView.OnItemClickLi
 
     public void addGames(ArrayList<Game> games) {
         myArray.addAll(games);
+        Log.v("GAME", myArray.toString());
+        mAdapter = new ArrayAdapter<Game>(getActivity(),
+                android.R.layout.simple_list_item_1, myArray);
+        ((BaseAdapter) mAdapter).notifyDataSetChanged();
+        Log.v("GAME", "updated");
     }
 
     @Override
