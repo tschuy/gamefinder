@@ -1,5 +1,6 @@
 package com.tschuy.gamefinder;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -63,6 +64,13 @@ public class MainActivity extends AppCompatActivity implements GamesFragment.OnF
 
     public void onFragmentInteraction(String id) {
         Toast.makeText(getApplicationContext(), "Interaction!", Toast.LENGTH_LONG).show();
+    }
+
+    public void gameClicked(Game game) {
+        Toast.makeText(getApplicationContext(), game.toString(), Toast.LENGTH_LONG).show();
+        Intent i = new Intent(this, GameDetail.class);
+        i.putExtra("com.tschuy.gamefinder.Game", game);
+        startActivity(i);
     }
 
 
